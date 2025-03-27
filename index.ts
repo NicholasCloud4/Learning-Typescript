@@ -51,6 +51,31 @@ function completeOrder(orderId: number) {
     return order;
 }
 
+/**
+ * Challenge: create a new utility function called getPizzaDetail. It will take
+ * a parameter called `identifier`, but there's a twist: we want this identifier
+ * to be allowed to either be the string name of the pizza (e.g. "Pepperoni"),
+ * OR to be the number ID of the pizza (e.g. 2).
+ *
+ * Don't worry about the code inside the function yet, just create the function
+ * signature, making sure to teach TS that the `identifier` parameter is allowed
+ * to either be a string or a number.
+ */
+
+function getPizzaDetail(identifier: string | number) {
+    /**
+     * Challenge: write the code to check if the parameter is a string
+     * or a number, and use the menu.find() method accordingly
+     */
+    if (typeof identifier === "string") {
+        return menu.find(
+            (pizza) => pizza.name.toLowerCase() === identifier.toLowerCase()
+        );
+    } else {
+        return menu.find((pizza) => pizza.id === identifier);
+    }
+}
+
 addNewPizza({ id: 5, name: "Chicken Bacon Ranch", price: 12 });
 addNewPizza({ id: 6, name: "BBQ Chicken", price: 12 });
 addNewPizza({ id: 7, name: "Spicy Sausage", price: 11 });
