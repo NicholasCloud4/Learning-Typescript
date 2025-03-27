@@ -71,8 +71,12 @@ function getPizzaDetail(identifier: string | number) {
         return menu.find(
             (pizza) => pizza.name.toLowerCase() === identifier.toLowerCase()
         );
-    } else {
+    } else if (typeof identifier === "number") {
         return menu.find((pizza) => pizza.id === identifier);
+    } else {
+        throw new TypeError(
+            "Parameter `identifier` must be either a string or a number"
+        );
     }
 }
 
