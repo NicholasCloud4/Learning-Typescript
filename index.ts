@@ -1,12 +1,11 @@
+/**
+ * Challenge: Fix the TS warnings about orderQueue!
+ */
+
 type Pizza = {
     name: string;
     price: number;
 };
-
-/**
- * Challenge: Add an Order type. It should have `id`, `pizza`, and `status` properties.
- * Look through the code if you need a reminder as to what data types those should be.
- */
 
 type Order = {
     id: number;
@@ -23,7 +22,7 @@ const menu = [
 
 let cashInRegister = 100;
 let nextOrderId = 1;
-const orderQueue = [];
+const orderQueue: Order[] = [];
 
 function addNewPizza(pizzaObj: Pizza) {
     menu.push(pizzaObj);
@@ -45,9 +44,18 @@ function placeOrder(pizzaName: string) {
     return newOrder;
 }
 
+/**
+ * Challenge: Fix the warning below by handling the "sad path" scenario!
+ */
+
 function completeOrder(orderId: number) {
     const order = orderQueue.find((order) => order.id === orderId);
+    if (!order) {
+        console.error(`${orderId} was not found in the orderQueue`);
+        throw new Error();
+    }
     order.status = "completed";
+
     return order;
 }
 
