@@ -1,16 +1,17 @@
-/**
- * Challenge: Fix the TS warnings about orderQueue!
- */
-
 type Pizza = {
     name: string;
     price: number;
 };
 
+/**
+ * Challenge: using literal types and unions, update the Order status so that
+ * it can only ever be "ordered" or "completed"
+ */
+
 type Order = {
     id: number;
     pizza: Pizza;
-    status: string;
+    status: "ordered" | "completed";
 };
 
 const menu = [
@@ -35,7 +36,7 @@ function placeOrder(pizzaName: string) {
         return;
     }
     cashInRegister += selectedPizza.price;
-    const newOrder = {
+    const newOrder: Order = {
         id: nextOrderId++,
         pizza: selectedPizza,
         status: "ordered",
@@ -44,18 +45,13 @@ function placeOrder(pizzaName: string) {
     return newOrder;
 }
 
-/**
- * Challenge: Fix the warning below by handling the "sad path" scenario!
- */
-
 function completeOrder(orderId: number) {
     const order = orderQueue.find((order) => order.id === orderId);
     if (!order) {
         console.error(`${orderId} was not found in the orderQueue`);
-        throw new Error();
+        return;
     }
     order.status = "completed";
-
     return order;
 }
 
@@ -64,7 +60,11 @@ addNewPizza({ name: "BBQ Chicken", price: 12 });
 addNewPizza({ name: "Spicy Sausage", price: 11 });
 
 placeOrder("Chicken Bacon Ranch");
+placeOrder("Pepperoni");
 completeOrder(1);
+placeOrder("Anchovy");
+placeOrder("Veggie");
+completeOrder(2);
 
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);
