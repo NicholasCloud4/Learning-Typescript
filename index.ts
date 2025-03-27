@@ -1,11 +1,17 @@
-/**
- * Challenge: Create a Pizza object type. It should include a `name`
- * and a `price` property.
- */
-
 type Pizza = {
     name: string;
     price: number;
+};
+
+/**
+ * Challenge: Add an Order type. It should have `id`, `pizza`, and `status` properties.
+ * Look through the code if you need a reminder as to what data types those should be.
+ */
+
+type Order = {
+    id: number;
+    pizza: Pizza;
+    status: string;
 };
 
 const menu = [
@@ -18,12 +24,6 @@ const menu = [
 let cashInRegister = 100;
 let nextOrderId = 1;
 const orderQueue = [];
-
-/**
- * Challenge: teach TS that the pizzaObj is supposed to be a Pizza type.
- * Then like before, look through the code to see if there are any new
- * TS warnings to deal with (😉), and fix those issues
- */
 
 function addNewPizza(pizzaObj: Pizza) {
     menu.push(pizzaObj);
