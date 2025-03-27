@@ -29,7 +29,7 @@ function placeOrder(pizzaName) {
     return newOrder;
 }
 
-function completeOrder(orderId) {
+function completeOrder(orderId: number) {
     const order = orderQueue.find((order) => order.id === orderId);
     order.status = "completed";
     return order;
@@ -40,7 +40,7 @@ addNewPizza({ name: "BBQ Chicken", cost: 12 });
 addNewPizza({ name: "Spicy Sausage", cost: 11 });
 
 placeOrder("Chicken Bacon Ranch");
-completeOrder("1");
+completeOrder(1);
 
 console.log("Menu:", menu);
 console.log("Cash in register:", cashInRegister);
