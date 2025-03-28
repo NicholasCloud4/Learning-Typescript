@@ -23,22 +23,26 @@ const menu: Pizza[] = [
 
 const orderQueue: Order[] = [];
 
-function addNewPizza(pizzaObj: Pizza): void {
-    menu.push(pizzaObj);
-}
-
 /**
- * Challenge part 1.5: Try to move the logic for adding an ID to the pizza objects
- * inside the addNewPizza function, so that we can call addNewPizza with no id, and
- * the function will handle that part for us.
- *
- * NOTE: you will run into TS warnings that we'll address soon, but the code should
- * still run.
+ * Challenge:
+ * Fix the addNewPizza function using the Omit utility type. This might
+ * require more than just changing the "Pizza" typed `pizzaObj` parameter.
+ * Return the new pizza object (with the id added) from the function.
  */
 
-addNewPizza({ id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 });
-addNewPizza({ id: nextPizzaId++, name: "BBQ Chicken", price: 12 });
-addNewPizza({ id: nextPizzaId++, name: "Spicy Sausage", price: 11 });
+function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
+    // pizzaObj = nextPizzaId++;
+    const newPizzaObj: Pizza = {
+        id: nextPizzaId++,
+        ...pizzaObj,
+    };
+    menu.push(newPizzaObj);
+    return newPizzaObj;
+}
+
+addNewPizza({ name: "Chicken Bacon Ranch", price: 12 });
+addNewPizza({ name: "BBQ Chicken", price: 12 });
+addNewPizza({ name: "Spicy Sausage", price: 11 });
 
 function placeOrder(pizzaName: string): Order | undefined {
     const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
