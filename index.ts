@@ -21,15 +21,11 @@ let cashInRegister = 100;
 let nextOrderId = 1;
 const orderQueue: Order[] = [];
 
-function addNewPizza(pizzaObj: Pizza): void {
+function addNewPizza(pizzaObj: Pizza) {
     menu.push(pizzaObj);
 }
 
-/**
- * Challenge: add explicit return types to the rest of our functions
- */
-
-function placeOrder(pizzaName: string): Order | undefined {
+function placeOrder(pizzaName: string) {
     const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
     if (!selectedPizza) {
         console.error(`${pizzaName} does not exist in the menu`);
@@ -45,7 +41,7 @@ function placeOrder(pizzaName: string): Order | undefined {
     return newOrder;
 }
 
-function completeOrder(orderId: number): Order | undefined {
+function completeOrder(orderId: number) {
     const order = orderQueue.find((order) => order.id === orderId);
     if (!order) {
         console.error(`${orderId} was not found in the orderQueue`);
@@ -54,6 +50,13 @@ function completeOrder(orderId: number): Order | undefined {
     order.status = "completed";
     return order;
 }
+
+/**
+ * Challenge (part 1): add a return type to the getPizzaDetail function.
+ *
+ * NOTE: you're very likely going to get a big TS warning once you do this 😅
+ * Don't fret, we'll address this warning next!
+ */
 
 export function getPizzaDetail(identifier: string | number): Pizza | undefined {
     if (typeof identifier === "string") {
